@@ -55,55 +55,37 @@ kyrie = {
     "position": "Point Guard", 
     "team": "Brooklyn Nets"
 }
-#! challenge 1
 
 
 
-# player_kevin = Player(kevin)
-# player_jason = Player(jason)
-# player_kyrie = Player(kyrie)
-
-# #! challenge 3
-
-# class Player:
-#     def __init__(self, dict):
-#         self.name = dict['name']
-#         self.age = dict['age']
-#         self.position = dict['position']
-#         self.team = dict['team']
+class Player:
+    def __init__(self, dict):
+        self.name = dict['name']
+        self.age = dict['age']
+        self.position = dict['position']
+        self.team = dict['team']
     
-#     # @classmethod
-#     # def __repr__(self):
-#     #     return '{}'.format(self.name)
-
-# new_team = []
-
-# for dict in players:
-#     player =  Player(dict)
-#     new_team.append(player)
-
-# print(new_team)
-
-# for index_object in new_team:
-#     print(index_object.name)
-
-#TODO ninja Bonus - Not finished..
-
-# TODO class Player:
-#     def __init__(self, dict):
-#         self.name = dict['name']
-#         self.age = dict['age']
-#         self.position = dict['position']
-#         self.team = dict['team']
-
-#     @classmethod
-#     def __repr__(self):
-#         return self.name
+    def __repr__(self):
+        return self.name
     
-#     @classmethod
-#     def get_team(cls, team_list):
-#         new_list = []
-#         for dict in team_list:
-#             new_list.append(dict)
-#         print(new_list)
+    @classmethod
+    def get_team(cls, team_list):
+        new_list = []
+        for dict in team_list:
+            new_player = Player(dict)
+            new_list.append(new_player)
+        print(f'\nClass Method: {new_list}\n')
 
+
+
+player_kevin = Player(kevin)
+player_jason = Player(jason)
+player_kyrie = Player(kyrie)
+
+new_team = []
+for dict in players:
+    player =  Player(dict)
+    new_team.append(player)
+print(f'\nLoop method: {new_team}\n')
+
+Player.get_team(players)
