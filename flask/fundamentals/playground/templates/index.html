@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground</title>
+</head>
+<body>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    h1{
+        text-align: center;
+        margin-top: 100px;
+    }
+    .shapes{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .cube{
+        background-color: {{color}};
+        height: 300px;
+        width: 300px;
+        border: 2px solid black;
+        margin: 20px;
+        border-radius: 20px;
+    }
+</style>
+    <div class="container">
+        <main class="main">
+            <h1>Welcome!</h1>
+            <div class="shapes">
+                {% for i in range(0,num)%}
+                <div class="cube"></div>
+                {%endfor%}
+            </div>
+        </main>
+    </div>
+</body>
+</html>
