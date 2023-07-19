@@ -1,8 +1,6 @@
 from flask import Flask, render_template
 app = Flask(__name__)
 
-background_color = 1
-
 @app.route('/')
 def home_page():
     return render_template('index.html', row_num = 8, column_num = 8, color_1='black', color_2 = 'red')
