@@ -17,7 +17,9 @@ def process():
     session['name'] = request.form['name']
     session['location'] = request.form['location']
     session['language'] = request.form['language']
+    session['courses'] = request.form.getlist('courses')
     session['comments'] = request.form['comments']
+    print(session)
     return redirect('/result')
 
 @app.route('/reset')

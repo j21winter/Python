@@ -43,6 +43,14 @@
                 <td>{{session['language']}}</td>
             </tr>
             <tr>
+                <td>Completed Courses</td>
+                    <td>
+                        {% for course in session['courses']%}
+                            {{course}},<br>
+                        {% endfor %}
+                    </td>
+            </tr>
+            <tr>
                 <td>Comments</td>
                 <td>{{session['comments']}}</td>
             </tr>
