@@ -15,9 +15,9 @@
                 <div class="row">
                     {%for column in range(0,column_num):%}
                     {%if (row+column) % 2 != 0: %}
-                    <div class="box" style="background-color: {{color_1}}" ></div>
+                        <div class="box" style="background-color: {{color_1}}" ></div>
                     {%else:%}
-                    <div class="box" style="background-color: {{color_2}}" ></div>
+                        <div class="box" style="background-color: {{color_2}}" ></div>
                     {%endif%}
                     {%endfor%}
                 </div>
