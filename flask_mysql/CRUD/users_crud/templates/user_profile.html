@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <div class="container">
+        <h1>User {{user.id}}</h1>
+        <a href="/read(all)">Home</a>
+        <div class="info_block">
+            <p>Full Name: {{user.first_name}} {{user.last_name}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Created on: {{user.created_at.strftime("%d %B, %Y, %H:%M")}}</p>
+            <p>Last Updated On: {{user.updated_at.strftime("%d %B, %Y, %H:%M")}} </p>
+        </div>
+        <a href="/edit/{{user.id}}">Edit</a> | <a href="">Delete</a>
+    </div>
+</body>
+</html>
