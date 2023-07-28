@@ -42,7 +42,7 @@ def make_edits(user_id):
         'last_name': request.form['last_name'],
         'email': request.form['email']
     }
-    updated_user = User.update_user(data)
+    User.update_user(data)
     return redirect(f'/show/{user_id}')
 
 @app.route('/delete_user/<user_id>')

@@ -3,19 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>User Profile</title>
 </head>
 <body>
-    <div class="container">
-        <h1>User {{user.id}}</h1>
-        <a href="/read(all)">Home</a>
-        <div class="info_block">
-            <p>Full Name: {{user.first_name}} {{user.last_name}}</p>
-            <p>Email: {{user.email}}</p>
-            <p>Created on: {{user.created_at.strftime("%d %B, %Y, %H:%M")}}</p>
-            <p>Last Updated On: {{user.updated_at.strftime("%d %B, %Y, %H:%M")}} </p>
-        </div>
-        <a href="/edit/{{user.id}}">Edit</a> | <a href="">Delete</a>
+    <div class="container w-50" style="margin: 20px;">
+        <h1 class="display-1">User {{user.id}}</h1>
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td class="wd-25">Full name:</td>
+                <td class="wd-25">{{user.first_name}} {{user.last_name}}</td>
+            </tr>
+            <tr>
+                <td class="wd-25">Email:</td>
+                <td class="wd-25">{{user.email}}</td>
+            </tr>
+            <tr>
+                <td class="wd-25">Created On:</td>
+                <td class="wd-25">{{user.created_at.strftime("%d %B, %Y, %H:%M")}}</td>
+            </tr>
+            <tr>
+                <td class="wd-25">Updated On:</td>
+                <td class="wd-25">{{user.updated_at.strftime("%d %B, %Y, %H:%M")}}</td>
+            </tr>
+        </table>
+        <a class="btn btn-outline-primary" href="/read(all)">Home</a>  <a class="btn btn-outline-warning" href="/edit/{{user.id}}">Edit</a>  <a class="btn btn-outline-danger" href="/delete_user/{{user.id}}">Delete</a>
     </div>
 </body>
 </html>
