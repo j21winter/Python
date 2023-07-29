@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Edit Profile</title>
+</head>
+<body>
+    <div class="container w-40" style="margin: 20px;">
+        <div class="row">
+            <h1>Edit User {{user.id}}</h1>
+            <a class="btn btn-info" href="/read(all)">HOME</a>
+        </div>
+        <form action="/make_edits/{{user.id}}" method="POST">
+            <input type="hidden" name="user_id" value="{{user.id}}">
+            <div class="row">
+                <label class="form-label col-sm-2 col-form-label" for="first_name">First Name:</label>
+                <input class="form-control" type="text" name="first_name" value="{{user.first_name}}">
+            </div>
+            <div class="row">
+                <label class="form-label col-sm-2 col-form-label" for="last_name">Last Name:</label>
+                <input class="form-control" type="text" name="last_name" value="{{user.last_name}}">
+            </div>
+            <div class="row">
+                <label class="form-label col-sm-2 col-form-label" for="email" >Email</label>
+                <input class="form-control" type="text" name="email" value="{{user.email}}">
+            </div>
+            <input class="btn btn-outline-info" type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
