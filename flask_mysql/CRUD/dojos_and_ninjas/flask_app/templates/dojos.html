@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dojo.css') }}">
+    <title>Dojos</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Left colunm to display the form to create a new dojo -->
+        <!--TODO ///// WORKING ////  -->
+        <div class="left_main">
+            <h1>New Dojo</h1>
+            <form action="/save_dojo" method="POST">
+                <label for="new_dojo_name">Name:</label>
+                <input name="new_dojo_name" type="text">
+                <button type="submit">Create</button>
+            </form>
+        </div>
+        <!-- Right column to display all dojos listed in the DB -->
+        <!--TODO ///// WORKING ////  -->
+        <div class="right_main">
+            <h1>All Dojos</h1>
+            <div class="list">
+                <ul>
+                <!-- jinja to display every dojo in the DB as a list -->
+                    {% for dojo in dojos%}
+                    <li>
+                        <!-- each dojo name should be a link to their own page.  -->
+                        <!--! ///// NOT WORKING ////  -->
+                        <a href="dojo/{{dojo.id}}">{{dojo.name}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a href="/add_ninja">Add Ninja</a>
+        </div>
+    </div>
+</body>
+</html>

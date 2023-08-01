@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.list{
+    border: 2px solid black;
+    padding: 20px;
+    margin: 20px 0px;
+    text-align: left;
+}
+
+.container{
+    padding-top: 50px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+
+ul{
+    list-style: none;
+}
+
+li{
+    margin-bottom: 10px;
+}
