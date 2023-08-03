@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show {{dojo['name']}}</title>
+    <title>Show {{dojo.name}}</title>
 </head>
 <body>
     <div class="container">
-        <h1>{{dojo['name']}} Ninjas</h1>
+        <h1>{{dojo.name}} Ninjas</h1>
         <table>
             <thead>
                 <tr>
                     <td>First Name</td>
                     <td>Last Name</td>
                     <td>Age</td>
+                    <td>Actions</td>
                 </tr>
             </thead>
             <tbody>
                 <!-- we need to get all students from the dojo -->
-                {% for ninja in ninjas %}
+                {% for ninja in dojo.ninjas %}
                 <tr>
                     <td>{{ninja.first_name}}</td>
                     <td>{{ninja.last_name}}</td>
                     <td>{{ninja.age}}</td>
+                    <td><a href="/update/{{ninja.id}}">Edit</a> | <a href="/delete/{{ninja.id}}">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
