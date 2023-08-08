@@ -46,6 +46,6 @@ class Ninja:
     
     @classmethod
     def edit_ninja(cls, data):
-        query = 'UPDATE ninjas SET first_name = %(first_name)s, last_name = %(last_name)s, age = %(age)s, updated_at = NOW() WHERE id = %(id)s; '
+        query = 'UPDATE ninjas SET first_name = %(first_name)s, last_name = %(last_name)s, age = %(age)s, dojo_id = %(dojo)s ,updated_at = NOW() WHERE id = %(id)s; '
         return connectToMySQL(cls.DB).query_db(query, data)
 

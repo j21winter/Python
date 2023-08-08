@@ -32,9 +32,7 @@ def delete_ninja(id):
 @app.route('/update/<int:id>')
 def display_update_ninja_form(id):
     ninja = Ninja.get_ninja_by_id(id)
-    print(ninja)
     dojos = Dojo.get_all_dojos()
-    print(f'dojos = {dojos}')
     return render_template('/update_ninja.html', ninja = ninja, dojos = dojos)
 
 @app.route('/updating', methods=['POST'])
@@ -43,7 +41,8 @@ def update_ninja_process():
         'id': request.form['id'],
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
-        'age': request.form['age']
+        'age': request.form['age'],
+        'dojo': request.form['dojo']
     }
     Ninja.edit_ninja(data)
-    return redirect(f'/dojo/{request.form["id"]}')
+    return redirect(f'/dojo/{request.form["dojo"]}')

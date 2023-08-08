@@ -16,7 +16,6 @@ class Dojo:
         dojos = []
         for dojo in results:
             dojos.append(cls(dojo))
-        print(f"dojo list {dojos}")
         return dojos
     
     @classmethod
