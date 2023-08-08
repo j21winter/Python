@@ -32,10 +32,31 @@
             <a href="/read(all)">Home</a>
         </div>
         <form action="/create_user" method="post">
+            {% with messages = get_flashed_messages(category_filter=['first_name']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <label for="first_name">First Name:</label>
             <input type="text" name="first_name" id="first_name">
+            {% with messages = get_flashed_messages(category_filter=['last_name']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <label for="last_name">Last Name:</label>
             <input type="text" name="last_name" id="last_name">
+            {% with messages = get_flashed_messages(category_filter=['email']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <label for="email">Email:</label>
             <input type="text" name="email" id="email">
             <input type="submit" value="Create Friend">
