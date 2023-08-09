@@ -34,16 +34,16 @@
 
                     <div class="mb-3">
                         <label class="col-6" for="email"> Email:</label>
-                        <input class="col-6" type="text" name="email">
+                        <input class="col-6" type="email" name="email">
                     </div>
                     
                     <div class="mb-3">
                         <label class="col-6" for="password"> Password:</label>
-                        <input class="col-6" type="text" name="password">
+                        <input class="col-6" type="password" name="password">
                     </div>
                     <div class="mb-3">
                         <label class="col-6" for="confirm_password"> Confirm Password:</label>
-                        <input class="col-6" type="text" name="confirm_password">
+                        <input class="col-6" type="password" name="confirm_password">
                     </div>
                     
                     <button class="btn btn-info" type="submit">Submit</button>
@@ -53,14 +53,21 @@
             <!-- Login Form -->
             <div class="login col-6">
                 <h2>Login</h2>
+                {% with messages = get_flashed_messages(category_filter=['login']) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
                 <form action="/login/user" method="POST" class="form">
                     <div class="mb-3">
                         <label class="col-6" for="email"> Email:</label>
-                        <input class="col-6" type="text" name="email">
+                        <input class="col-6" type="email" name="email">
                     </div>
                     <div class="mb-3">
                         <label class="col-6" for="password"> Password:</label>
-                        <input class="col-6" type="text" name="password">
+                        <input class="col-6" type="password" name="password">
                     </div>
                     <button class="btn btn-info">Login</button>
                 </form>

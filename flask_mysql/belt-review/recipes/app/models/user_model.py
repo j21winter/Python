@@ -1,6 +1,10 @@
 import re
+from app import app
 from app.config.mysqlconnection import connectToMySQL
+from app.models import recipe_model
 from flask import Flask, flash
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app) 
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 PASSWORD_REGEX = re.compile(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$")
@@ -13,13 +17,13 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.created_at = data['created_at']
-        self.updated_at = data['updated_at']
         self.recipes = []
 
     #add users to DB
     @classmethod
     def save_user(cls, data):
+        #hash password
+        data['password'] =  bcrypt.generate_password_hash(data['password'])
         print('SAVING USER')
         query = '''
                 INSERT INTO users (first_name, last_name, email, password)
@@ -27,6 +31,17 @@ class User:
                 '''
         result = connectToMySQL(cls.db).query_db(query, data)
         return result
+    
+    @classmethod
+    def get_one(cls,id):
+        print(f'GETTING USERS WITH ID {id}')
+        query = '''
+                SELECT * FROM users
+                WHERE id = %(id)s;'''
+        results = connectToMySQL(cls.db).query_db(query, {'id': id})
+        user = cls(results[0])
+        print(f'GETTING USER sending back {user}')
+        return user
     
     #find users with email
     @classmethod
@@ -42,6 +57,29 @@ class User:
         print(f'GETTING USERS sending back {users_list}')
         return users_list
     
+    # get user with all attached recipes
+    @classmethod
+    def get_user_with_recipes(cls, id):
+        query = """
+                SELECT * FROM users
+                LEFT JOIN recipes on users.id = recipes.user_id
+                WHERE users.id = %(id)s;
+                """
+        results = connectToMySQL(cls.db).query_db(query, {'id': id})
+        user = cls(results[0])
+        for row in results:
+            recipe_data = {
+                'id': row['recipe.id'],
+                'name': row['name'],
+                'description': row['description'],
+                'instructions': row['instructions'],
+                'under_30_mins': row['under_30_mins'],
+                'date_cooked': row['date_cooked']
+            }
+            user.recipes.append(recipe_model.Recipe(recipe_data))
+        return user
+
+
     #validate registration form information
     @staticmethod
     def validate_user(data):
