@@ -27,4 +27,20 @@ def save_recipe():
     })
     return redirect('/dashboard')
 
-#! next we will be looking to create the edit recipe and the show recipe page
+@app.route('/edit/recipe/<int:id>')
+def display_edit_recipe(id):
+    print(f'ID = {id}')
+    recipe = Recipe.get_one(id)
+    return render_template('edit_recipe.html', recipe = recipe)
+
+# !!!!!!!!!!!!!!
+
+@app.route('/update_recipe', methods=['POST'])
+def edit_recipe():
+    print(request.form)
+    if not Recipe.validate_recipe(request.form):
+        flash('Updating recipe failed! Please try again', 'add_recipe')
+        return redirect(f'/edit/recipe/{request.form["recipe_id"]}')
+    Recipe.update_recipe(request.form)
+    return redirect('/dashboard')
+

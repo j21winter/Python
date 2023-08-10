@@ -3,6 +3,7 @@ from flask import Flask, flash
 from app.models import user_model
 
 class Recipe:
+
     db = 'recipes'
     
     def __init__(self, data):
@@ -16,7 +17,7 @@ class Recipe:
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
     
-    #I do not like the way that I am finding the name. There has got to be a way to make this work without the wierd for loop at the end appending the name to the recipe object
+    # get all recipes with their user attached to them!
     @classmethod
     def get_all(cls):
         print(f'GETTING recipes')
@@ -28,10 +29,29 @@ class Recipe:
         results = connectToMySQL(cls.db).query_db(query)
         recipes = []
         for row in results:
-            recipe = (cls(row))
-            recipe.user_name = user_model.User.get_one(recipe.user_id).first_name
+            recipe = cls(row)
+            creator = user_model.User({
+                                    'id': row['user_id'],
+                                    'first_name': row['first_name'],
+                                    'last_name': row['last_name'],
+                                    'email': row['email'],
+                                    'password': row['password'],
+                                    })
+            recipe.creator = creator
             recipes.append(recipe)
+        print(f'SENDING BACK {recipes}')
         return recipes
+    
+    @classmethod
+    def get_one(cls,id):
+        print(f'GETTING recipe WITH ID {id}')
+        query = '''
+                SELECT * FROM recipes
+                WHERE id = %(id)s;'''
+        results = connectToMySQL(cls.db).query_db(query, {'id': id})
+        recipe = cls(results[0])
+        print(f'GETTING RECIPE sending back {recipe}')
+        return recipe
     
     @classmethod
     def save_recipe(cls, data):
@@ -42,16 +62,30 @@ class Recipe:
                 '''
         return connectToMySQL(cls.db).query_db(query, data)
     
+    @classmethod
+    def update_recipe(cls, data):
+        query = '''
+                UPDATE recipes
+                SET name = %(name)s, 
+                    description = %(description)s,
+                    instructions = %(instructions)s, 
+                    under_30_mins = %(under_30_mins)s,
+                    date_cooked = %(date_cooked)s
+                WHERE id = %(recipe_id)s;'''
+        return connectToMySQL(cls.db).query_db(query,data)
+    
     #validate recipe form information
     @staticmethod
     def validate_recipe(data):
         # Set is_valid to true as default
         is_valid = True
-        print(data)
         for key in data:
             if len(data[f"{key}"])< 1:
                     flash(f'{key} field must be filled', 'add_recipe')
                     is_valid = False
+        if 'under_30_mins' not in data:
+            flash('under_30_mins field must be filled', 'add_recipe')
+            is_valid = False
         return is_valid
 
 # add folder to workspace

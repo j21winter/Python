@@ -54,7 +54,7 @@ def login_user():
 @app.route('/dashboard')
 def dashboard():
     if not 'id' in session:
-        return redirect('/')
+        return redirect('/logout')
     user = User.get_one(session['id'])
     recipes = recipe_model.Recipe.get_all()
     return render_template('dashboard.html', user = user, recipes = recipes)

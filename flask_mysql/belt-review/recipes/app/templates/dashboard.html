@@ -37,9 +37,9 @@
                     {% else: %}
                         <td>NO</td>
                     {% endif %}
-                    <td>{{recipe.user_name}}</td>
+                    <td>{{recipe.creator.first_name}}</td>
                     {% if user.id == recipe.user_id: %}
-                        <td><a href="####">view recipe</a> | <a href="####">edit</a> | <a href="####">delete</a></td>
+                        <td><a href="####">view recipe</a> | <a href="/edit/recipe/{{recipe.id}}">edit</a> | <a href="####">delete</a></td>
                     {% else:%}
                         <td><a href="####">view recipe</a></td>
                     {% endif %}
