@@ -7,18 +7,18 @@
     <title>Recipes</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
 
-        <h1>Recipe Share</h1>
-        <div class="main d-flex">
+        <h1 class="display-1 mt-5">Recipe Share</h1>
+        <div class="main d-flex justify-content-evenly">
             <!-- Registration Form  -->
-            <div class="register col-6">
+            <div class="register col-5 bg-secondary p-4 rounded rounded-3 mr-1 text-light border border-3 border-dark ">
                 <h2>Register</h2>
                 <form action="/register/user" method="POST" class="form">
                     {% with messages = get_flashed_messages(category_filter=['registration']) %}
                         {% if messages %}
                             {% for message in messages %}
-                                <p>{{message}}</p>
+                                <p class="bg-warning">{{message}}</p>
                             {% endfor %}
                         {% endif %}
                     {% endwith %}
@@ -46,12 +46,12 @@
                         <input class="col-6" type="password" name="confirm_password">
                     </div>
                     
-                    <button class="btn btn-info" type="submit">Submit</button>
+                    <button class="btn btn-light" type="submit">Submit</button>
                 </form>
             </div>
     
             <!-- Login Form -->
-            <div class="login col-6">
+            <div class="login col-5 bg-light p-4 rounded rounded-3 mr-1 text-dark border border-2 border-secondary">
                 <h2>Login</h2>
                 {% with messages = get_flashed_messages(category_filter=['login']) %}
                     {% if messages %}

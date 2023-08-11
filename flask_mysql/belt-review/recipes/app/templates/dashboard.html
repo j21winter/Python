@@ -7,41 +7,41 @@
     <title>Recipes Dashboard</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome {{user.first_name}}</h1>
-        <div class="navigation d-flex">
-            <div class="left_nav col-8 justify-content-start ">
+    <div class="container mt-5">
+        <h1 class="display-1 mt-5">Welcome {{session['first_name']}}</h1>
+        <div class="navigation d-flex align-items-center mt-5">
+            <div class="left_nav col-8 justify-content-start d-flex align-items-baseline">
                 <h3>All Posted Recipes:</h3>
             </div>
-            <div class="right_nav col-4 justify-content-evenly">
-                <a href="/add_recipe">+ Create</a>
-                <a href="/logout">Logout</a>
+            <div class="right_nav col-4 justify-content-evenly  d-flex align-items-center">
+                <a class="btn btn-success" href="/add_recipe">+ Create</a>
+                <a class="btn btn-danger" href="/logout">Logout</a>
             </div>
         </div>
-        <table class="table">
+        <table class="table table-light rounded rounded-3 overflow-hidden text-center mt-5">
             <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Under 30</td>
-                    <td>Posted By</td>
-                    <td>Actions</td>
+                <tr class="table-secondary align-items-center">
+                    <td class="col-3">Name</td>
+                    <td class="col-3">Under 30</td>
+                    <td class="col-3">Posted By</td>
+                    <td class="col-3">Actions</td>
                 </tr>
             </thead>
             <!-- need a get all recipes -->
             <tbody>
                 {% for recipe in recipes :%}
                 <tr>
-                    <td>{{recipe.name}}</td>
+                    <td >{{recipe.name}}</td>
                     {% if recipe.under_30_mins == 1 : %}
                         <td>YES</td>
                     {% else: %}
                         <td>NO</td>
                     {% endif %}
                     <td>{{recipe.creator.first_name}}</td>
-                    {% if user.id == recipe.user_id: %}
-                        <td><a href="####">view recipe</a> | <a href="/edit/recipe/{{recipe.id}}">edit</a> | <a href="####">delete</a></td>
+                    {% if session['id'] == recipe.user_id: %}
+                        <td><a  class="btn btn-info" href="/show/recipe/{{recipe.id}}">view recipe</a> | <a  class="btn btn-warning" href="/edit/recipe/{{recipe.id}}">edit</a> | <a  class="btn btn-danger" href="/delete/recipe/{{recipe.id}}">Delete</a></td>
                     {% else:%}
-                        <td><a href="####">view recipe</a></td>
+                        <td><a class="btn btn-info" href="/show/recipe/{{recipe.id}}">view recipe</a></td>
                     {% endif %}
                 </tr>
                 {% endfor %}

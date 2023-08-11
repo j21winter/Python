@@ -22,9 +22,8 @@ class User:
     #add users to DB
     @classmethod
     def save_user(cls, data):
-        #hash password
         data['password'] =  bcrypt.generate_password_hash(data['password'])
-        print('SAVING USER')
+        
         query = '''
                 INSERT INTO users (first_name, last_name, email, password)
                 VALUES(%(first_name)s,%(last_name)s,%(email)s,%(password)s);
@@ -45,17 +44,20 @@ class User:
     
     #find users with email
     @classmethod
-    def get_users_with_email(cls,email):
-        print('GETTING USERS WITH EMAIL')
+    def get_user_with_email(cls,email):
+        print('GETTING USER WITH EMAIL')
         query = '''
                 SELECT * FROM users
                 WHERE email = %(email)s;'''
         results = connectToMySQL(cls.db).query_db(query, {'email': email})
-        users_list = []
-        for user in results:
-            users_list.append(cls(user))
-        print(f'GETTING USERS sending back {users_list}')
-        return users_list
+        if len(results) < 1:
+            return False
+        else:
+            print(f'GETTING USERS sending back {results[0]}')
+        return cls(results[0])
+            # users_list = []
+            # for user in results:
+            #     users_list.append(cls(user))
     
     # get user with all attached recipes
     @classmethod
@@ -120,7 +122,7 @@ class User:
             is_valid = False
         
         #unique
-        if len(User.get_users_with_email(data['email'])) > 0:
+        if User.get_user_with_email(data['email']):
             flash('Email not unique, please provide another', 'registration')
             is_valid = False
 

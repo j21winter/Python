@@ -17,7 +17,8 @@ class Recipe:
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
     
-    # get all recipes with their user attached to them!
+    
+
     @classmethod
     def get_all(cls):
         print(f'GETTING recipes')
@@ -30,29 +31,41 @@ class Recipe:
         recipes = []
         for row in results:
             recipe = cls(row)
-            creator = user_model.User({
+            recipe.creator = user_model.User({
                                     'id': row['user_id'],
                                     'first_name': row['first_name'],
                                     'last_name': row['last_name'],
                                     'email': row['email'],
                                     'password': row['password'],
                                     })
-            recipe.creator = creator
             recipes.append(recipe)
-        print(f'SENDING BACK {recipes}')
         return recipes
     
+
+
     @classmethod
     def get_one(cls,id):
         print(f'GETTING recipe WITH ID {id}')
         query = '''
                 SELECT * FROM recipes
-                WHERE id = %(id)s;'''
+                LEFT JOIN users 
+                ON recipes.user_id = users.id
+                WHERE recipes.id = %(id)s;
+                '''
         results = connectToMySQL(cls.db).query_db(query, {'id': id})
         recipe = cls(results[0])
+        recipe.creator = user_model.User({
+                                    'id': results[0]['user_id'],
+                                    'first_name': results[0]['first_name'],
+                                    'last_name': results[0]['last_name'],
+                                    'email': results[0]['email'],
+                                    'password': results[0]['password'],
+                                    })
         print(f'GETTING RECIPE sending back {recipe}')
         return recipe
     
+
+
     @classmethod
     def save_recipe(cls, data):
         print('SAVING RECIPE')
@@ -61,6 +74,8 @@ class Recipe:
                 VALUES(%(name)s,%(description)s,%(instructions)s,%(under_30_mins)s, %(date_cooked)s, %(user_id)s);
                 '''
         return connectToMySQL(cls.db).query_db(query, data)
+    
+
     
     @classmethod
     def update_recipe(cls, data):
@@ -71,31 +86,33 @@ class Recipe:
                     instructions = %(instructions)s, 
                     under_30_mins = %(under_30_mins)s,
                     date_cooked = %(date_cooked)s
-                WHERE id = %(recipe_id)s;'''
+                WHERE id = %(recipe_id)s;
+                '''
         return connectToMySQL(cls.db).query_db(query,data)
     
-    #validate recipe form information
+
+
+    @classmethod
+    def delete_recipe(cls,id):
+        query = '''
+                DELETE FROM recipes
+                WHERE id = %(id)s;
+                '''
+        return connectToMySQL(cls.db).query_db(query, {'id': id})
+
+    
     @staticmethod
     def validate_recipe(data):
-        # Set is_valid to true as default
         is_valid = True
+
         for key in data:
             if len(data[f"{key}"])< 1:
                     flash(f'{key} field must be filled', 'add_recipe')
                     is_valid = False
+        
         if 'under_30_mins' not in data:
             flash('under_30_mins field must be filled', 'add_recipe')
             is_valid = False
+        
         return is_valid
-
-# add folder to workspace
-# debugger
-# click debugger
-# drop down 
-# config for the file you are working on 
-# run with python 
-# run with flask framework
-#     change debug flask from app.py to server.py
-# set the environment for the debugger
-
 
