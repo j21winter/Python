@@ -36,9 +36,23 @@ class User:
         print(f'GETTING USERS WITH ID {id}')
         query = '''
                 SELECT * FROM users
+                LEFT JOIN recipes on users.id = recipes.user_id
                 WHERE id = %(id)s;'''
         results = connectToMySQL(cls.db).query_db(query, {'id': id})
         user = cls(results[0])
+        for row in results:
+            recipe_data = { 
+                'id':row['recipes.id'],
+                'name':row['name'],
+                'description':row['description'],
+                'instructions':row['instructions'],
+                'under_30_mins':row['under_30_mins'],
+                'date_cooked':row['date_cooked'],
+                'created_at':row['created_at'],
+                'updated_at':row['updated_at'],
+                'user_id':row['user_id'],
+            }
+            user.recipes.append(recipe_model.Recipe(recipe_data))
         print(f'GETTING USER sending back {user}')
         return user
     
@@ -48,13 +62,28 @@ class User:
         print('GETTING USER WITH EMAIL')
         query = '''
                 SELECT * FROM users
+                LEFT JOIN recipes on users.id = recipes.user_id
                 WHERE email = %(email)s;'''
         results = connectToMySQL(cls.db).query_db(query, {'email': email})
         if len(results) < 1:
             return False
         else:
+            user = cls(results[0])
+            for row in results:
+                recipe_data = { 
+                    'id':row['recipes.id'],
+                    'name':row['name'],
+                    'description':row['description'],
+                    'instructions':row['instructions'],
+                    'under_30_mins':row['under_30_mins'],
+                    'date_cooked':row['date_cooked'],
+                    'created_at':row['created_at'],
+                    'updated_at':row['updated_at'],
+                    'user_id':row['user_id']
+                }
+                user.recipes.append(recipe_model.Recipe(recipe_data))
             print(f'GETTING USERS sending back {results[0]}')
-        return cls(results[0])
+        return user
             # users_list = []
             # for user in results:
             #     users_list.append(cls(user))
@@ -70,13 +99,16 @@ class User:
         results = connectToMySQL(cls.db).query_db(query, {'id': id})
         user = cls(results[0])
         for row in results:
-            recipe_data = {
-                'id': row['recipe.id'],
-                'name': row['name'],
-                'description': row['description'],
-                'instructions': row['instructions'],
-                'under_30_mins': row['under_30_mins'],
-                'date_cooked': row['date_cooked']
+            recipe_data = { 
+                'id':row['recipes.id'],
+                'name':row['name'],
+                'description':row['description'],
+                'instructions':row['instructions'],
+                'under_30_mins':row['under_30_mins'],
+                'date_cooked':row['date_cooked'],
+                'created_at':row['created_at'],
+                'updated_at':row['updated_at'],
+                'user_id':row['user_id']
             }
             user.recipes.append(recipe_model.Recipe(recipe_data))
         return user
