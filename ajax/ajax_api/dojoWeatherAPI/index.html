@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Weather</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+<!-- nav Bar -->
+        <nav>
+            <div id="nav-content">
+                <h1>DojoWeather</h1>
+                <div id="nav-right">
+                    <a href="#" onclick="chooseCity(this), open_weather('burbank')">Burbank</a>
+                    <a href="#" onclick="chooseCity(this), open_weather('chicago')">Chicago</a>
+                    <a href="#" onclick="chooseCity(this), open_weather('dallas')">Dallas</a>
+                </div>
+            </div>
+        </nav>
+
+<!-- main content -->
+        <main>
+            <div id="content-title">
+                <h2 id="city_name">San Jose</h2>
+                <p>Current Temperature: <span id="current_temp" class="temp9"></span> </p>
+                <div id="content-title-right"  >
+                    <p>show temperature in </p>
+                    <select name="temp-units" id="temp-units" onchange="changeUnit(this)">
+                        <option id="celsius">°C</option>
+                        <option id="fahrenheit">°F</option>
+                    </select>
+                </div>
+            </div>
+            <div id="days-display">
+                <div class="day">
+                    <h3 id="day_0">Today</h3>
+                    <img src="./assets/some_rain.png" alt="Some rain - icon" class="weather-icon">
+                    <p class="weather_description" id="description_0">some rain</p>
+                    <div class="temperature-display">
+                        <p class="high-temp temp1" id="temp1">24°</p>
+                        <p class="low-temp temp2" id="temp2">18°</p>
+                    </div>
+                </div>
+
+                <div class="day">
+                    <h3 id="day_1">Tomorrow</h3>
+                    <img src="./assets/some_sun.png" alt="Some sun - icon" class="weather-icon">
+                    <p class="weather-description" id="description_1">some sun</p>
+                    <div class="temperature-display">
+                        <p class="high-temp temp3" id="temp3">27°</p>
+                        <p class="low-temp temp4" id="temp4">19°</p>
+                    </div>
+                </div>
+                <div class="day">
+                    <h3 id="day_2">Saturday</h3>
+                    <img src="./assets/some_clouds.png" alt="Some clouds - icon" class="weather-icon">
+                    <p class="weather-description" id="description_2">some clouds</p>
+                    <div class="temperature-display">
+                        <p class="high-temp temp5" id="temp5">21°</p>
+                        <p class="low-temp temp6" id="temp6">16°</p>
+                    </div>
+                </div>
+                <div class="day">
+                    <h3 id="day_3">Sunday</h3>
+                    <img src="./assets/some_sun.png" alt="Some sun - icon" class="weather-icon">
+                    <p class="weather-description" id="description_3">some sun</p>
+                    <div class="temperature-display">
+                        <p class="high-temp temp7" id="temp7">26°</p>
+                        <p class="low-temp temp8" id="temp8">21°</p>
+                </div>
+                </div>
+            </div>
+            <div id="cookie-message">
+                <img src="./assets/cookie.png" alt="Cookie Icon" class="cookie-icon">
+                <div class="message-content">
+                    <h4>Stop! Cookie time</h4>
+                    <p>We use cookies (sadly not the edible ones) to personalize content and ads, to provide social media features and to analyze our traffic. <a href="#">Read more...</a></p>
+                </div>
+                <button class="accept-button" onclick="removeCookie('cookie-message')">I Accept</button>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
