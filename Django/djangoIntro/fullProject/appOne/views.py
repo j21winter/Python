@@ -25,3 +25,6 @@ def destroy(request, number):
 
 def json(request):
     return JsonResponse({'title' : "blog TITle", 'content' : 'this is my content' })
+
+def data(request):
+    return render(request, "test.html", {"data": "NEW DATA THIS TIME "})
