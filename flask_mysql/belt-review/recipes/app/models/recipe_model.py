@@ -86,6 +86,7 @@ class Recipe:
                     instructions = %(instructions)s, 
                     under_30_mins = %(under_30_mins)s,
                     date_cooked = %(date_cooked)s
+                    updated_at = NOW(),
                 WHERE id = %(recipe_id)s;
                 '''
         return connectToMySQL(cls.db).query_db(query,data)

@@ -30,20 +30,20 @@
             <!-- need a get all recipes -->
             <tbody>
                 {% for recipe in recipes :%}
-                <tr>
-                    <td >{{recipe.name}}</td>
-                    {% if recipe.under_30_mins == 1 : %}
-                        <td>YES</td>
-                    {% else: %}
-                        <td>NO</td>
-                    {% endif %}
-                    <td>{{recipe.creator.first_name}}</td>
-                    {% if session['id'] == recipe.user_id: %}
-                        <td><a  class="btn btn-info" href="/show/recipe/{{recipe.id}}">view recipe</a> | <a  class="btn btn-warning" href="/edit/recipe/{{recipe.id}}">edit</a> | <a  class="btn btn-danger" href="/delete/recipe/{{recipe.id}}">Delete</a></td>
-                    {% else:%}
-                        <td><a class="btn btn-info" href="/show/recipe/{{recipe.id}}">view recipe</a></td>
-                    {% endif %}
-                </tr>
+                    <tr>
+                        <td >{{recipe.name}}</td>
+                        {% if recipe.under_30_mins == 1 : %}
+                            <td>YES</td>
+                        {% else: %}
+                            <td>NO</td>
+                        {% endif %}
+                        <td>{{recipe.creator.first_name}}</td>
+                        {% if session['id'] == recipe.user_id: %}
+                            <td><a  class="btn btn-info" href="/show/recipe/{{recipe.id}}">view recipe</a> | <a  class="btn btn-warning" href="/edit/recipe/{{recipe.id}}">Edit</a> | <a  class="btn btn-danger" href="/delete/recipe/{{recipe.id}}">Delete</a></td>
+                        {% else:%}
+                            <td><a class="btn btn-info" href="/show/recipe/{{recipe.id}}">view recipe</a></td>
+                        {% endif %}
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>

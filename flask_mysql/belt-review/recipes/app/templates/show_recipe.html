@@ -9,8 +9,9 @@
 <body>
     <div class="container mt-5">
         <div class="navigation d-flex justify-content-between mt-5 col-10 ">
-            <h1 class="display-1 mt-5">Welcome {{session['first_name']}}</h1>
-            <div class="right_nav col-4 d-flex mt-5 justify-content-end align-items-center">
+            <h1 class="display-1 mt-5">Sasquatch Websighting</h1>
+            <div class="right_nav col-4 mt-5 d-flex flex-column justify-content-end align-items-end">
+                <h2 class="display-3 mt-8">{{session['first_name']}}</h2>
                 <a class="btn btn-info" href="/dashboard">Back to Recipes</a>
                 <a class="btn btn-danger" href="/logout">Logout</a>
             </div>

@@ -1,0 +1,36 @@
+Query #1
+
+INSERT INTO songs(title,artists,rating, NOW(), NOW())
+VALUES (x,x,x)
+
+Query #2
+
+SELECT * FROM songs;
+
+Query #3
+
+DELETE FROM songs;
+WHERE id == 'x'
+
+DELETE FROM songs
+WHERE title == 'x'
+
+Query #4
+
+SELECT * FROM songs
+WHERE artist == 'Ed Sheeran'
+
+Query #6 
+SELECT * FROM songs
+WHERE artist LIKE '%x%'
+
+Query #7 
+SELECT * FROM songs
+LIMIT 10
+ORDER BY rating, DESC;
+
+Query #8
+SELECT * FROM songs
+WHERE artist NOT LIKE 'Ed Sheeran'
+LIMIT 10
+ORDER BY rating, DESC;

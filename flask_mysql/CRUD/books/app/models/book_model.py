@@ -47,6 +47,8 @@ class Book:
         print(f'results are:\n {results}')
         book = cls(results[0])
         for author in results:
+            if author['authors.id'] == None:
+                break
             author_data = {
                 'id': author['authors.id'],
                 'name': author['name'],
