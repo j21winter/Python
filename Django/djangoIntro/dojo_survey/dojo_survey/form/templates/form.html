@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+</head>
+<body>
+    <h1>Form</h1>
+    <form action="{% url 'result' %}" method="post">
+        {% csrf_token %}
+        
+        Your Name: <input type="text" name="name">
+
+        Dojo Location 
+        <select name="dojoLocation">
+            <option value="here">here</option>
+            <option value="there">there</option>
+            <option value="everywhere">everywhere</option>
+            <option value="nowhere">nowhere</option>
+            <option value="somewhere">somewhere</option>
+        </select>
+
+        Favorite Language: 
+        <input type="radio" name="faveLang" value="python">
+        <label for="python">Python</label>
+        <input type="radio" name="faveLang" value="javaScript">
+        <label for="javaScript">JavaScript</label>
+        <input type="radio" name="faveLang" value="java">
+        <label for="java">Java</label>
+
+        I have completed all the required fields 
+        <input type="checkbox" name="check">
+
+        Comments
+        <textarea name="comment" cols="30" rows="10"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
