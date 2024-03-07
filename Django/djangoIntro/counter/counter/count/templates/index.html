@@ -7,6 +7,20 @@
 </head>
 <body>
     <h1>Visit Count</h1>
-    <p>{{ request.session.count }}</p>
+    <p>Real Count: {{ request.session.count }}</p>
+    <p>Custom Count: {{ request.session.custom_count }}</p>
+    <form action="/custom" method="post">
+        {% csrf_token %}
+        <input type="number" name="num" id="num" min="1">
+        <button type="submit">Increment</button>
+    </form>
+    <form action="/double" method="post">
+        {% csrf_token %}
+        <button type="submit">+ 2</button>
+    </form>
+    <form action="/delete" method="post">
+        {% csrf_token %}
+        <button type="submit">Reset Count</button>
+    </form>
 </body>
 </html>
