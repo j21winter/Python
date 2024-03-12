@@ -1,0 +1,27 @@
+CREATE NEW USER
+User.objects.create(first_name = "jonny", last_name = "Winter", email_address = "jon@jon.com", age=29)
+
+All USERS
+User.objects.all()
+
+FIRST USER
+User.objects.first().__dict__
+
+LAST USER
+User.objects.last()__dict__
+
+UPDATE USER ID = 3
+u = User.objects.get(id = 3)
+u.last_name = "Pancakes"
+u.save()
+
+DELETE USER ID = 2
+u = user.objects.get(id = 2)
+u.delete()
+
+GET ALL ORDERED BY FIRST NAME
+User.objects.all().order_by('first_name')
+
+GET ALL ORDERED DECENDING BY FIRST NAME
+User.objects.all().order_by('-first_name')
+
