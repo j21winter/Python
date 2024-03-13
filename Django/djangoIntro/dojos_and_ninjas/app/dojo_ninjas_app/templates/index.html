@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <div class="header">
+        <h3>Add a Dojo</h3>
+        <form action="/dojo/new" method="post">
+            {% csrf_token %}
+            Name: <input type="text" name="name">
+            City: <input type="text" name="city">
+            State: <input type="text" name="state">
+            <button type="submit">Add</button>
+        </form>
+
+        <h3>Add a Ninja</h3>
+        <form action="/ninja/new" method="post">
+            {% csrf_token %}
+            First Name: <input type="text" name="first_name">
+            Last Name: <input type="text" name="last_name">
+            Dojo: <select name="dojo_id">
+                {% for dojo in all_dojos %}
+                    <option value='{{dojo.id}}'>{{dojo.name}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+    <div class="main">
+        <h3>All the Dojos</h3>
+        {% for dojo in all_dojos %}
+            <p>Ninjas at the {{dojo.name}} - {{ dojo.ninjas.all|length }}</p>
+            <form action="dojo/delete" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="dojo_id" value="{{dojo.id}}">
+                <button type="submit">Delete Dojo</button>
+            </form>
+            <ul>
+                {% for ninja in dojo.ninjas.all %}
+                <li>{{ninja.first_name}} {{ninja.last_name}}</li>
+                <form action="/ninja/delete" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="ninja_id" value="{{ninja.id}}">
+                    <button type="submit">Delete Ninja</button>
+                </form>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+</body>
+</html>
